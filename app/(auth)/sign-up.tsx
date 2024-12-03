@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Redirect } from "expo-router";
+import { Link, Redirect } from "expo-router";
 import React, { useState } from "react";
 import { View, Text, Image } from "react-native";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "@/constants";
 import InputField from "@/components/InputField";
+import CustomButton from "@/components/CustomButton";
+import OAuth from "@/components/OAuth";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -13,6 +15,8 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+
+  const onSignUpPress = async () => {};
 
   return (
     <ScrollView>
@@ -38,13 +42,56 @@ const SignUp = () => {
               iconStyle={undefined}
               className={undefined}
             />
+
+            <InputField
+              label="Email"
+              placeholder="Enter your email"
+              icon={icons.email}
+              value={form.email}
+              onChangeText={(value: any) => setForm({ ...form, email: value })}
+              labelStyle={undefined}
+              containerStyle={undefined}
+              inputStyle={undefined}
+              iconStyle={undefined}
+              className={undefined}
+            />
+
+            <InputField
+              label="Password"
+              placeholder="Enter your password"
+              icon={icons.lock}
+              secureTextEntry={true}
+              value={form.password}
+              onChangeText={(value: any) =>
+                setForm({ ...form, password: value })
+              }
+              labelStyle={undefined}
+              containerStyle={undefined}
+              inputStyle={undefined}
+              iconStyle={undefined}
+              className={undefined}
+            />
+
+            <CustomButton
+              title="Sign Up"
+              onPress={onSignUpPress}
+              className="mt-6"
+            />
+
+            <OAuth />
+            <Link href="/sign-in">
+              <Text className="text-lg text-center text-general-200 mt-10">
+                Already have an account? {" "}
+              </Text>
+              <Text className="text-primary-500">Log In</Text>
+            </Link>
           </View>
+
+          {/*verification modal */}
         </View>
       </View>
     </ScrollView>
   );
-
-  // return <Redirect href="/(auth)/welcome"/>;
 };
 
 export default SignUp;
